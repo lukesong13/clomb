@@ -4,6 +4,8 @@ import com.clomb.tracker.dto.UserDto;
 import com.clomb.tracker.entities.User;
 import org.springframework.stereotype.Component;
 
+import java.util.Locale;
+
 @Component
 public class UserMapper {
 
@@ -15,8 +17,11 @@ public class UserMapper {
                 UserDto.getEmail(),
                 UserDto.getShoes(),
                 UserDto.getChalk(),
-                UserDto.getClimbingGymId(),
-                UserDto.getRouteId()
+                UserDto.getUsername(),
+                UserDto.getPassword(),
+                UserDto.getGender(),
+                UserDto.getCreateDate(),
+                UserDto.getUpdateDate()
         );
 
     }
@@ -29,8 +34,11 @@ public class UserMapper {
                 user.getEmail(),
                 user.getShoes(),
                 user.getChalk(),
-                user.getClimbingGymId(),
-                user.getRouteId()
+                user.getUsername(),
+                user.getPassword(),
+                user.getGender(),
+                user.getCreateDate(),
+                user.getUpdateDate()
         );
 
 

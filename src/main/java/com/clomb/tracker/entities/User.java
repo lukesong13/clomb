@@ -18,10 +18,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "email")
@@ -33,12 +33,19 @@ public class User {
     @Column(name = "chalk")
     private String chalk;
 
-    @Column(name = "gymId")
-    private int climbingGymId;
+    @Column(name = "username")
+    private String username;
 
-    @Column(name = "routeId")
-    private int routeId;
+    @Column(name = "password")
+    private String password;
 
+    @Column(name = "gender")
+    private String gender;
 
+    @Column(name = "create_date")
+    private String createDate;
+
+    @Column(name = "update_date")
+    private String updateDate;
 
 }

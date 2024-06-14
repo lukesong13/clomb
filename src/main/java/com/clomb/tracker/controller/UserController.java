@@ -4,10 +4,9 @@ import com.clomb.tracker.dto.UserDto;
 import com.clomb.tracker.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -28,5 +27,25 @@ public class UserController {
     In the return statement, we are than passing that productDto object to the productService.createProduct()
     method.
      */
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable int id) {
+        UserDto userDto = userService.getUserById(id);
+                return ResponseEntity.ok(userDto);
+
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUserById(@PathVariable int id) {
+        String status = userService.deleteUserById(id);
+        return ResponseEntity.ok(status);
+    }
 
 }

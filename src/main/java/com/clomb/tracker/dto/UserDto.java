@@ -16,8 +16,11 @@ public class UserDto {
     private String email;
     private String shoes;
     private String chalk;
-    private int climbingGymId;
-    private int routeId;
+    private String username;
+    private String password;
+    private String gender;
+    private String createDate;
+    private String updateDate;
 
 }
 

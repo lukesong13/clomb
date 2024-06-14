@@ -2,12 +2,15 @@ package com.clomb.tracker.services;
 
 import com.clomb.tracker.dto.UserDto;
 
+import java.util.List;
+
 public interface UserService {
 
     UserDto createUser(UserDto UserDto);
-    UserDto getUser(int id);
+    UserDto getUserById(int id);
+    List<UserDto> getAllUsers();
     UserDto updateUser(int id);
-    UserDto deleteUser(int id);
+    String deleteUserById(int id);
 
 
     /*

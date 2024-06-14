@@ -8,6 +8,9 @@ import com.clomb.tracker.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserImpl implements UserService {
 
@@ -26,8 +29,18 @@ public class UserImpl implements UserService {
     }
 
     @Override
-    public UserDto getUser(int id) {
-        return null;
+    public UserDto getUserById(int id) {
+        User user = userRepository.
+                findById(id).
+                orElseThrow(() -> new RuntimeException("User of this ID does not exist"));
+        return userMapper.mapToUserDto(user);
+    }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDto> userDtos = users.stream().map(userMapper::mapToUserDto).collect(Collectors.toList());
+        return userDtos;
     }
 
     @Override
@@ -36,7 +49,15 @@ public class UserImpl implements UserService {
     }
 
     @Override
-    public UserDto deleteUser(int id) {
-        return null;
+    public String deleteUserById(int id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return "Successfully deleted user with id " + id;
+        } else {
+            return "no record of user with id " + id;
+        }
     }
+
 }
+
+
