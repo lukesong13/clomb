@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -46,6 +46,37 @@ public class UserController {
     public ResponseEntity<String> deleteUserById(@PathVariable int id) {
         String status = userService.deleteUserById(id);
         return ResponseEntity.ok(status);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable int id, @RequestBody Map<String, String> request){
+        String firstName = request.get("firstName");
+        String lastName = request.get("lastName");
+        String email = request.get("email");
+        String shoes = request.get("shoes");
+        String chalk = request.get("chalk");
+        String username = request.get("username");
+        String password = request.get("password");
+        String gender = request.get("gender");
+        String createDate = null;
+        String updateDate = request.get("updateDate");
+
+        UserDto userDtoFromRequest = new UserDto(
+                id,
+                firstName,
+                lastName,
+                email,
+                shoes,
+                chalk,
+                username,
+                password,
+                gender,
+                createDate,
+                updateDate);
+
+        UserDto userDto = userService.updateUser(id,userDtoFromRequest);
+
+        return ResponseEntity.ok(userDto);
     }
 
 }

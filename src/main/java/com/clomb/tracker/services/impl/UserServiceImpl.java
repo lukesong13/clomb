@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -44,8 +44,23 @@ public class UserImpl implements UserService {
     }
 
     @Override
-    public UserDto updateUser(int id) {
-        return null;
+    public UserDto updateUser(int id, UserDto userDto) {
+        User user = userRepository.
+                findById(id).
+                orElseThrow( () -> new RuntimeException("User of this ID does not exist"));
+
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setChalk(userDto.getChalk());
+        user.setShoes(userDto.getShoes());
+        user.setUsername(userDto.getUsername());
+        user.setPassword(userDto.getPassword());
+        user.setGender(userDto.getGender());
+        user.setUpdateDate(userDto.getUpdateDate());
+
+        User savedUser = userRepository.save(user);
+        return userMapper.mapToUserDto(savedUser);
     }
 
     @Override
