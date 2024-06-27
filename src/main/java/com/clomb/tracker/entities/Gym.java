@@ -11,7 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name="gyms")
 @Entity
-
 public class Gym {
 
     @Id
