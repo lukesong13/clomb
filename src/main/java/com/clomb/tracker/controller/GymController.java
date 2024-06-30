@@ -30,55 +30,43 @@ public class GymController {
     method.
      */
 //
-//    @GetMapping("/{id}")
-//    public ResponseEntity<UserDto> getUserById(@PathVariable int id) {
-//        UserDto userDto = userService.getUserById(id);
-//                return ResponseEntity.ok(userDto);
-//
-//    }
-//
-//    @GetMapping
-//    public ResponseEntity<List<UserDto>> getAllUsers() {
-//        List<UserDto> users = userService.getAllUsers();
-//        return ResponseEntity.ok(users);
-//
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<String> deleteUserById(@PathVariable int id) {
-//        String status = userService.deleteUserById(id);
-//        return ResponseEntity.ok(status);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<UserDto> updateUser(@PathVariable int id, @RequestBody Map<String, String> request){
-//        String firstName = request.get("firstName");
-//        String lastName = request.get("lastName");
-//        String email = request.get("email");
-//        String shoes = request.get("shoes");
-//        String chalk = request.get("chalk");
-//        String username = request.get("username");
-//        String password = request.get("password");
-//        String gender = request.get("gender");
-//        String createDate = null;
-//        String updateDate = request.get("updateDate");
-//
-//        UserDto userDtoFromRequest = new UserDto(
-//                id,
-//                firstName,
-//                lastName,
-//                email,
-//                shoes,
-//                chalk,
-//                username,
-//                password,
-//                gender,
-//                createDate,
-//                updateDate);
-//
-//        UserDto userDto = userService.updateUser(id,userDtoFromRequest);
-//
-//        return ResponseEntity.ok(userDto);
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<GymDto> getGymById(@PathVariable int id) {
+        GymDto gymDto = gymService.getGymById(id);
+                return ResponseEntity.ok(gymDto);
+
+    }
+
+    @GetMapping
+    public ResponseEntity<List<GymDto>> getAllUsers() {
+        List<GymDto> gyms = gymService.getAllGyms();
+        return ResponseEntity.ok(gyms);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteGymById(@PathVariable int id) {
+         String status = gymService.deleteGymById(id);
+        return ResponseEntity.ok(status);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<GymDto> updateUser(@PathVariable int id, @RequestBody Map<String, String> request){
+        String gymName = request.get("gymName");
+        String gymAddress = request.get("gymAddress");
+        String gymCreateDate = null;
+        String gymUpdateDate = request.get("gymUpdateDate");
+
+        GymDto gymDtoFromRequest = new GymDto(
+                id,
+                gymName,
+                gymAddress,
+               gymCreateDate,
+               gymUpdateDate);
+
+        GymDto gymDto = gymService.updateGym(id,gymDtoFromRequest);
+
+        return ResponseEntity.ok(gymDto);
+    }
 
 }
