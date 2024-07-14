@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -46,6 +48,6 @@ public class User {
     private String createDate;
 
     @Column(name = "update_date")
-    private String updateDate;
+    private Timestamp updateDate;
 
 }

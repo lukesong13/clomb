@@ -3,6 +3,8 @@ package com.clomb.tracker.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.sql.Timestamp;
+
 @Data
 @AllArgsConstructor
 public class RouteDto {
@@ -13,7 +15,7 @@ public class RouteDto {
     private String color;
     private int gymId;
     private String routeCreateDate;
-    private String routeUpdateDate;
+    private Timestamp routeUpdateDate;
 
 }
 

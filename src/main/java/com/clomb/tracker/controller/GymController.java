@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @RestController
 @RequestMapping("/api/gyms")
@@ -51,11 +53,13 @@ public class GymController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GymDto> updateUser(@PathVariable int id, @RequestBody Map<String, String> request){
+    public ResponseEntity<GymDto> updateGym(@PathVariable int id, @RequestBody Map<String, String> request){
+        Instant instant = Instant.now();
+        long timestampEpochMilliseconds = instant.toEpochMilli();
         String gymName = request.get("gymName");
         String gymAddress = request.get("gymAddress");
         String gymCreateDate = null;
-        String gymUpdateDate = request.get("gymUpdateDate");
+        Timestamp gymUpdateDate = new Timestamp(timestampEpochMilliseconds);
 
         GymDto gymDtoFromRequest = new GymDto(
                 id,

@@ -1,6 +1,8 @@
 package com.clomb.tracker.services.impl;
 
+import com.clomb.tracker.dto.GymDto;
 import com.clomb.tracker.dto.RouteDto;
+import com.clomb.tracker.entities.Gym;
 import com.clomb.tracker.entities.Route;
 import com.clomb.tracker.mapper.RouteMapper;
 import com.clomb.tracker.repositories.RouteRepository;
@@ -31,64 +33,42 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public RouteDto getRouteById(int id) {
-        return null;
+        Route route = routeRepository.
+                findById(id).
+                orElseThrow(() -> new RuntimeException("Route of this ID does not exist"));
+        return routeMapper.mapToRouteDto(route);
     }
 
     @Override
     public List<RouteDto> getAllRoutes() {
-        return List.of();
+        List<Route> routes = routeRepository.findAll();
+        List<RouteDto> routeDtos = routes.stream().map(routeMapper::mapToRouteDto).collect(Collectors.toList());
+        return routeDtos;
     }
+
 
     @Override
     public RouteDto updateRoute(int id, RouteDto routeDto) {
-        return null;
+        Route route = routeRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("User of this ID does not exist"));
+
+        route.setGrade(routeDto.getGrade());
+        route.setColor(routeDto.getColor());
+        route.setSetter(routeDto.getSetter());
+        route.setRouteUpdateDate(routeDto.getRouteUpdateDate());
+
+        Route savedRoute = routeRepository.save(route);
+        return routeMapper.mapToRouteDto(savedRoute);
     }
 
     @Override
     public String deleteRouteById(int id) {
-        return "";
+        if (routeRepository.existsById(id)) {
+            routeRepository.deleteById((id));
+            return "Successfully deleted route with id " + id;
+        } else {
+            return "no record of route with id " + id;
+        }
     }
-
-//    @Override
-//    public GymDto getGymById(int id) {
-//        Gym gym = gymRepository.
-//                findById(id).
-//                orElseThrow(() -> new RuntimeException("Gym of this ID does not exist"));
-//        return gymMapper.mapToGymDto(gym);
-//    }
-//
-//    @Override
-//    public List<GymDto> getAllGyms() {
-//        List<Gym> gyms = gymRepository.findAll();
-//        List<GymDto> gymDtos = gyms.stream().map(gymMapper::mapToGymDto).collect(Collectors.toList());
-//        return gymDtos;
-//    }
-//
-//    @Override
-//    public GymDto updateGym(int id, GymDto gymDto) {
-//        Gym gym = gymRepository.findById(id).
-//                orElseThrow( () -> new RuntimeException("User of this ID does not exist"));
-//
-//        gym.setGymName(gymDto.getGymName());
-//        gym.setGymAddress(gymDto.getGymAddress());
-//        gym.setGymCreateDate(gymDto.getGymCreateDate());
-//        gym.setGymUpdateDate(gymDto.getGymUpdateDate());
-//
-//        Gym savedGym = gymRepository.save(gym);
-//        return gymMapper.mapToGymDto(savedGym);
-//    }
-//
-//    @Override
-//    public String deleteGymById(int id) {
-//        if(gymRepository.existsById(id)){
-//            gymRepository.deleteById((id));
-//            return "Successfully deleted gym with id "+ id;
-//        } else{
-//            return "no record of gym with id "+ id;
-//        }
-//    }
-//
-//
-
-
 }
+

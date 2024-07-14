@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.sql.Timestamp;
+
 @Data
 @AllArgsConstructor
 public class UserDto {
@@ -18,7 +20,7 @@ public class UserDto {
     private String password;
     private String gender;
     private String createDate;
-    private String updateDate;
+    private Timestamp updateDate;
 
 }
 

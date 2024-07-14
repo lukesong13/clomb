@@ -53,7 +53,6 @@ public class GymServiceImpl implements GymService {
 
         gym.setGymName(gymDto.getGymName());
         gym.setGymAddress(gymDto.getGymAddress());
-        gym.setGymCreateDate(gymDto.getGymCreateDate());
         gym.setGymUpdateDate(gymDto.getGymUpdateDate());
 
         Gym savedGym = gymRepository.save(gym);

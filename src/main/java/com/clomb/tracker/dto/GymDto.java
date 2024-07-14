@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.sql.Timestamp;
+
 @Data
 @AllArgsConstructor
 public class GymDto {
@@ -12,7 +14,7 @@ public class GymDto {
     private String gymName;
     private String gymAddress;
     private String gymCreateDate;
-    private String gymUpdateDate;
+    private Timestamp gymUpdateDate;
 
 }
 

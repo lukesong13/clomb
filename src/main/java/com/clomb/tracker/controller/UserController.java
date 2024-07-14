@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.*;
 
 @RestController
@@ -50,6 +52,9 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable int id, @RequestBody Map<String, String> request){
+        Instant instant = Instant.now();
+        long timestampEpochMilliseconds = instant.toEpochMilli();
+
         String firstName = request.get("firstName");
         String lastName = request.get("lastName");
         String email = request.get("email");
@@ -59,7 +64,7 @@ public class UserController {
         String password = request.get("password");
         String gender = request.get("gender");
         String createDate = null;
-        String updateDate = request.get("updateDate");
+        Timestamp updateDate = new Timestamp(timestampEpochMilliseconds);
 
         UserDto userDtoFromRequest = new UserDto(
                 id,

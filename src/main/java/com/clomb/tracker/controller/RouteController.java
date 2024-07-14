@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @RestController
 @RequestMapping("/api/routes")
@@ -30,43 +32,50 @@ public class RouteController {
 //    method.
 //     */
 ////
-//    @GetMapping("/{id}")
-//    public ResponseEntity<GymDto> getGymById(@PathVariable int id) {
-//        GymDto gymDto = gymService.getGymById(id);
-//                return ResponseEntity.ok(gymDto);
+    @GetMapping("/{id}")
+    public ResponseEntity<RouteDto> getRouteById(@PathVariable int id) {
+        RouteDto routeDto = routeService.getRouteById(id);
+                return ResponseEntity.ok(routeDto);
+
+    }
 //
-//    }
+    @GetMapping
+    public ResponseEntity<List<RouteDto>> getAllRoutes() {
+        List<RouteDto> routes = routeService.getAllRoutes();
+        return ResponseEntity.ok(routes);
+
+    }
 //
-//    @GetMapping
-//    public ResponseEntity<List<GymDto>> getAllUsers() {
-//        List<GymDto> gyms = gymService.getAllGyms();
-//        return ResponseEntity.ok(gyms);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteRouteById(@PathVariable int id) {
+         String status = routeService.deleteRouteById(id);
+        return ResponseEntity.ok(status);
+    }
 //
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<String> deleteGymById(@PathVariable int id) {
-//         String status = gymService.deleteGymById(id);
-//        return ResponseEntity.ok(status);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<GymDto> updateUser(@PathVariable int id, @RequestBody Map<String, String> request){
-//        String gymName = request.get("gymName");
-//        String gymAddress = request.get("gymAddress");
-//        String gymCreateDate = null;
-//        String gymUpdateDate = request.get("gymUpdateDate");
-//
-//        GymDto gymDtoFromRequest = new GymDto(
-//                id,
-//                gymName,
-//                gymAddress,
-//               gymCreateDate,
-//               gymUpdateDate);
-//
-//        GymDto gymDto = gymService.updateGym(id,gymDtoFromRequest);
-//
-//        return ResponseEntity.ok(gymDto);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<RouteDto> updateRoute(@PathVariable int id, @RequestBody Map<String, String> request){
+        Instant instant = Instant.now();
+        long timestampEpochMilliseconds = instant.toEpochMilli();
+        String grade = request.get("grade");
+        String setter = request.get("setter");
+        String color = request.get("color");
+        int gymId = -1;
+        String routeCreateDate = null;
+        Timestamp routeUpdateDate = new Timestamp(timestampEpochMilliseconds);
+
+        RouteDto routeDtoFromRequest = new RouteDto(
+                id,
+                grade,
+                setter,
+                color,
+                gymId,
+                routeCreateDate,
+               routeUpdateDate);
+
+
+        RouteDto routeDto = routeService.updateRoute(id,routeDtoFromRequest);
+
+        return ResponseEntity.ok(routeDto);
+    }
 //
 }

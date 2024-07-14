@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,6 +29,6 @@ public class Gym {
     private String gymCreateDate;
 
     @Column(name = "gym_update_date")
-    private String gymUpdateDate;
+    private Timestamp gymUpdateDate;
 
 }

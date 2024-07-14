@@ -11,32 +11,30 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="routes")
+@Table(name="climb_details")
 @Entity
-public class Route {
+public class ClimbDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "grade")
-    private String grade;
+    @Column(name = "user_id")
+    private int userId;
 
-    @Column(name = "setter")
-    private String setter;
-
-    @Column(name = "color")
-    private String color;
+    @Column(name = "route_id")
+    private int routeId;
 
     @Column(name = "gym_id")
     private int gymId;
 
-    @Column(name = "route_create_date")
-    private String routeCreateDate;
+    @Column(name = "notes")
+    private String notes;
 
-    @Column(name = "route_update_date")
-    private Timestamp routeUpdateDate;
+    @Column(name = "climb_details_create_date")
+    private Timestamp climbDetailsCreateDate;
+
+    @Column(name = "climb_details_update_date")
+    private Timestamp climbDetailsUpdateDate;
 
 }
-
-
