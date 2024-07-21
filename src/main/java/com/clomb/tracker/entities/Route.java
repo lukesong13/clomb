@@ -32,7 +32,7 @@ public class Route {
     private int gymId;
 
     @Column(name = "route_create_date")
-    private String routeCreateDate;
+    private Timestamp routeCreateDate;
 
     @Column(name = "route_update_date")
     private Timestamp routeUpdateDate;

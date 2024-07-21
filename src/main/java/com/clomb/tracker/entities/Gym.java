@@ -26,7 +26,7 @@ public class Gym {
     private String gymAddress;
 
     @Column(name = "gym_create_date")
-    private String gymCreateDate;
+    private Timestamp gymCreateDate;
 
     @Column(name = "gym_update_date")
     private Timestamp gymUpdateDate;

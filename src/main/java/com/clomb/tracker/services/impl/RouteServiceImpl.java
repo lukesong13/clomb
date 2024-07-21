@@ -50,7 +50,7 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public RouteDto updateRoute(int id, RouteDto routeDto) {
         Route route = routeRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("User of this ID does not exist"));
+                orElseThrow(() -> new RuntimeException("Route of this ID does not exist"));
 
         route.setGrade(routeDto.getGrade());
         route.setColor(routeDto.getColor());

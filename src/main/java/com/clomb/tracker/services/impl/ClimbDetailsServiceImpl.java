@@ -31,63 +31,40 @@ public class ClimbDetailsServiceImpl implements ClimbDetailsService {
 
     @Override
     public ClimbDetailsDto getClimbDetailsById(int id) {
-        return null;
+        ClimbDetails climbDetails = climbDetailsRepository.
+                findById(id).
+                orElseThrow(() -> new RuntimeException("Climb detail of this ID does not exist"));
+        return climbDetailsMapper.mapToClimbDetailsDto(climbDetails);
     }
 
     @Override
     public List<ClimbDetailsDto> getAllClimbDetails() {
-        return List.of();
+        List<ClimbDetails> climbDetails = climbDetailsRepository.findAll();
+             List<ClimbDetailsDto> climbDetailsDtos = climbDetails.stream().map(climbDetailsMapper::mapToClimbDetailsDto).collect(Collectors.toList());
+             return climbDetailsDtos;
     }
 
     @Override
     public ClimbDetailsDto updateClimbDetails(int id, ClimbDetailsDto climbdetailsDto) {
-        return null;
+        ClimbDetails climbDetails = climbDetailsRepository.findById(id).
+                orElseThrow( () -> new RuntimeException("Climb detail of this ID does not exist"));
+            climbDetails.setRouteId(climbdetailsDto.getRouteId());
+            climbDetails.setGymId(climbdetailsDto.getGymId());
+            climbDetails.setNotes(climbdetailsDto.getNotes());
+            climbDetails.setClimbDetailsUpdateDate(climbdetailsDto.getClimbDetailsUpdateDate());
+
+        ClimbDetails savedClimbDetails = climbDetailsRepository.save(climbDetails);
+        return climbDetailsMapper.mapToClimbDetailsDto(savedClimbDetails);
     }
 
     @Override
     public String deleteClimbDetailsById(int id) {
-        return "";
+        if(climbDetailsRepository.existsById(id)){
+            climbDetailsRepository.deleteById((id));
+            return "Successfully deleted climb detail with id "+ id;
+        } else{
+            return "no record of climb detail with id "+ id;
+        }
     }
-//
-//    @Override
-//    public GymDto getGymById(int id) {
-//        Gym gym = gymRepository.
-//                findById(id).
-//                orElseThrow(() -> new RuntimeException("Gym of this ID does not exist"));
-//        return gymMapper.mapToGymDto(gym);
-//    }
-//
-//    @Override
-//    public List<GymDto> getAllGyms() {
-//        List<Gym> gyms = gymRepository.findAll();
-//        List<GymDto> gymDtos = gyms.stream().map(gymMapper::mapToGymDto).collect(Collectors.toList());
-//        return gymDtos;
-//    }
-//
-//    @Override
-//    public GymDto updateGym(int id, GymDto gymDto) {
-//        Gym gym = gymRepository.findById(id).
-//                orElseThrow( () -> new RuntimeException("User of this ID does not exist"));
-//
-//        gym.setGymName(gymDto.getGymName());
-//        gym.setGymAddress(gymDto.getGymAddress());
-//        gym.setGymUpdateDate(gymDto.getGymUpdateDate());
-//
-//        Gym savedGym = gymRepository.save(gym);
-//        return gymMapper.mapToGymDto(savedGym);
-//    }
-//
-//    @Override
-//    public String deleteGymById(int id) {
-//        if(gymRepository.existsById(id)){
-//            gymRepository.deleteById((id));
-//            return "Successfully deleted gym with id "+ id;
-//        } else{
-//            return "no record of gym with id "+ id;
-//        }
-//    }
-//
-
-
 
 }

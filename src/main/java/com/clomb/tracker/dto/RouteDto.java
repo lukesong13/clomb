@@ -14,7 +14,7 @@ public class RouteDto {
     private String setter;
     private String color;
     private int gymId;
-    private String routeCreateDate;
+    private Timestamp routeCreateDate;
     private Timestamp routeUpdateDate;
 
 }

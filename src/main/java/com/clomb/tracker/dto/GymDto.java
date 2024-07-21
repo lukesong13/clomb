@@ -13,7 +13,7 @@ public class GymDto {
     private int id;
     private String gymName;
     private String gymAddress;
-    private String gymCreateDate;
+    private Timestamp gymCreateDate;
     private Timestamp gymUpdateDate;
 
 }

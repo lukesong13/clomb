@@ -21,6 +21,11 @@ public class UserController {
     }
     @PostMapping
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){
+        Instant instant = Instant.now();
+        long timestampEpochMilliseconds = instant.toEpochMilli();
+
+        userDto.setCreateDate(new Timestamp(timestampEpochMilliseconds));
+        userDto.setUpdateDate(new Timestamp(timestampEpochMilliseconds));
         return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
     }
     /*
@@ -63,7 +68,7 @@ public class UserController {
         String username = request.get("username");
         String password = request.get("password");
         String gender = request.get("gender");
-        String createDate = null;
+        Timestamp createDate = null;
         Timestamp updateDate = new Timestamp(timestampEpochMilliseconds);
 
         UserDto userDtoFromRequest = new UserDto(

@@ -22,6 +22,11 @@ public class RouteController {
     }
     @PostMapping
     public ResponseEntity<RouteDto> addRoute(@RequestBody RouteDto routeDto){
+        Instant instant = Instant.now();
+        long timestampEpochMilliseconds = instant.toEpochMilli();
+
+        routeDto.setRouteCreateDate(new Timestamp(timestampEpochMilliseconds));
+        routeDto.setRouteUpdateDate(new Timestamp(timestampEpochMilliseconds));
         return new ResponseEntity<>(routeService.createRoute(routeDto), HttpStatus.CREATED);
     }
 
@@ -60,7 +65,7 @@ public class RouteController {
         String setter = request.get("setter");
         String color = request.get("color");
         int gymId = -1;
-        String routeCreateDate = null;
+        Timestamp routeCreateDate = null;
         Timestamp routeUpdateDate = new Timestamp(timestampEpochMilliseconds);
 
         RouteDto routeDtoFromRequest = new RouteDto(

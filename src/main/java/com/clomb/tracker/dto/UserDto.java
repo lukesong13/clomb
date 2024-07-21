@@ -19,7 +19,7 @@ public class UserDto {
     private String username;
     private String password;
     private String gender;
-    private String createDate;
+    private Timestamp createDate;
     private Timestamp updateDate;
 
 }

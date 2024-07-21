@@ -45,7 +45,7 @@ public class User {
     private String gender;
 
     @Column(name = "create_date")
-    private String createDate;
+    private Timestamp createDate;
 
     @Column(name = "update_date")
     private Timestamp updateDate;

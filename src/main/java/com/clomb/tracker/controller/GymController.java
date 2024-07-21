@@ -22,6 +22,11 @@ public class GymController {
     }
     @PostMapping
     public ResponseEntity<GymDto> addUser(@RequestBody GymDto gymDto){
+        Instant instant = Instant.now();
+        long timestampEpochMilliseconds = instant.toEpochMilli();
+
+        gymDto.setGymCreateDate(new Timestamp(timestampEpochMilliseconds));
+        gymDto.setGymUpdateDate(new Timestamp(timestampEpochMilliseconds));
         return new ResponseEntity<>(gymService.createGym(gymDto), HttpStatus.CREATED);
     }
 
@@ -58,7 +63,7 @@ public class GymController {
         long timestampEpochMilliseconds = instant.toEpochMilli();
         String gymName = request.get("gymName");
         String gymAddress = request.get("gymAddress");
-        String gymCreateDate = null;
+        Timestamp gymCreateDate = null;
         Timestamp gymUpdateDate = new Timestamp(timestampEpochMilliseconds);
 
         GymDto gymDtoFromRequest = new GymDto(
