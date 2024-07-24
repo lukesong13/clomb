@@ -48,7 +48,7 @@ public class AwsConfig {
         Region region = Region.of("us-west-2");
 
         // Credentials for accessing Secrets Manager
-        AwsBasicCredentials awsCreds = AwsBasicCredentials.create("AKIA4MTWL4QMFLIZ4L64", "hello");
+        AwsBasicCredentials awsCreds = AwsBasicCredentials.create("AKIA4MTWL4QMFLIZ4L64", "temp");
 
         // Create a Secrets Manager client
         SecretsManagerClient client = SecretsManagerClient.builder()
