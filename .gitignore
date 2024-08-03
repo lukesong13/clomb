@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 config/
+#config ignore
 
 ### STS ###
 .apt_generated
