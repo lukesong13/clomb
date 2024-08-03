@@ -7,7 +7,7 @@ build/
 
 config/
 #config ignore
-.properties
+*.properties
 
 ### STS ###
 .apt_generated
